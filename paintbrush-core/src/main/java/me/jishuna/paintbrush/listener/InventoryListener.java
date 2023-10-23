@@ -13,7 +13,7 @@ import me.jishuna.paintbrush.dye.DyeRegistry;
 
 public class InventoryListener implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getCurrentItem() == null || event.getCursor() == null) {
             return;

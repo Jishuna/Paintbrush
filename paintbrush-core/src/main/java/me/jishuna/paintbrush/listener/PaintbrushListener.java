@@ -28,7 +28,7 @@ import me.jishuna.paintbrush.brushdata.PaintbrushData;
 
 public class PaintbrushListener implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK || !player.hasPermission("paintbrush.use")) {
