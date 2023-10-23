@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.3'
+}
+
+// shadowJar takes care of this
+jar.enabled = false
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
+    implementation (group: 'me.jishuna', name: 'jishlib', version: '1.2.0-SNAPSHOT')
+    implementation group: 'org.bstats', name: 'bstats-bukkit', version: '2.2.1'
+    bukkitLibrary "net.kyori:adventure-api:4.12.0"
+    bukkitLibrary "net.kyori:adventure-platform-bukkit:4.2.0"
+    bukkitLibrary "net.kyori:adventure-text-minimessage:4.12.0"
+}
+
+shadowJar {
+    relocate 'me.jishuna.jishlib', 'me.jishuna.paintbrush.libs.jishlib'
+    relocate 'org.bstats', 'me.jishuna.paintbrush.libs.bstats'
+    minimize()
+}
+
+bukkit {
+    name = 'Paintbrush'
+    version = rootProject.version
+    main = 'me.jishuna.paintbrush.Paintbrush'
+    apiVersion = '1.20'
+
+    commands {
+        paintbrush {
+            description = 'Primary command for this plugin'
+            permission = 'paintbrush.command'
+        }
+    }
+
+    permissions {
+        'paintbrush.command' {
+            setDefault('OP')
+        }
+        'paintbrush.command.reload' {
+            setDefault('OP')
+        }
+        'paintbrush.command.give' {
+            setDefault('OP')
+        }
+        'paintbrush.use' {
+            setDefault('TRUE')
+        }
+    }
+}
+
+build {
+    dependsOn shadowJar
+}

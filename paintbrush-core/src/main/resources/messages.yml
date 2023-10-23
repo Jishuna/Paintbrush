@@ -1,0 +1,21 @@
+paintbrush:
+  empty-name: "<white>Paintbrush"
+  name: "<white>Paintbrush - {0}"
+
+  empty-lore:
+    - "<gray>Combine with dye to add paint."
+  lore:
+    - "<white> \u00BB {1} {0} dye"
+    - " "
+    - "<gray>Right click colorable blocks"
+    - "<gray>to paint them."
+
+command:
+  no-permission: "<red>You do not have permission to use this command."
+  usage: "<red>Invalid argument: <gray>{0}. <red>Valid arguments are: <gray>{1}."
+  invalid-player: "<red>Player <gray>{0} <red>not found."
+  requires-player: "<red>A player name is required to run this command."
+  reload:
+    complete: "<green>Reload Complete."
+  give:
+    success: "<green>Gave paintbrush to {0}"

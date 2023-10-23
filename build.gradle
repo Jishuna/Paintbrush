@@ -1,0 +1,36 @@
+plugins {
+    id 'eclipse'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+}
+
+// shadowJar takes care of this
+jar.enabled = false
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    implementation project(path: (':paintbrush-core'), configuration: 'shadow')
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
+tasks.register('copyJar', Copy) {
+    doNotTrackState("")
+    def target = System.getenv("plugin-dir")
+
+    if (target != null) {
+        from shadowJar
+        into file(target)
+    }
+}
+
+build {
+    dependsOn shadowJar
+    finalizedBy copyJar
+}
